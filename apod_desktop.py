@@ -266,7 +266,7 @@ def determine_apod_file_path(image_title, image_url):
     # Hint: Use regex and/or str class methods to determine the filename.
     extension = image_url.split('.')[-1]
     cleaned_title = re.sub(r'\W+', '_', image_title.strip())
-    path = f'{image_cache_dir}\{cleaned_title}.{extension}'
+    path = f'{image_cache_dir}\\{cleaned_title}.{extension}'
     return path
 
 def get_apod_info(image_id):

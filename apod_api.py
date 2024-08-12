@@ -24,15 +24,14 @@ def get_apod_info(apod_date):
     # Hint: The APOD API uses query string parameters: https://requests.readthedocs.io/en/latest/user/quickstart/#passing-parameters-in-urls
     # Hint: Set the 'thumbs' parameter to True so the info returned for video APODs will include URL of the video thumbnail image
     print(f'Getting {apod_date} APOD information from NASA...', end='') 
-    payload = {'date': apod_date, 'thumbs': True, 'api_key':'zDGHiR6GROUp4lyM6MnPkBlYa3eFGgsUJerUaRtC'}
-    resp_msg = requests.get(APOD_API_URL, params = payload)
+    payload={'Date': apod_date, 'Thumbs': True, 'api_key':'zDGHiR6GROUp4lyM6MnPkBlYa3eFGgsUJerUaRtC'}
+    resp_msg=requests.get(APOD_API_URL,params=payload)
     if resp_msg.status_code == requests.codes.ok:
-            print('success')
-            # Return dictionary of Pokemon info
+            print('Success')
             return resp_msg.json()
     else:
-        print('failure')
-        print(f'Response code: {resp_msg.status_code} ({resp_msg.reason})')
+        print('Failure')
+        print(f'Response Message: {resp_msg.status_code} ({resp_msg.reason})')
     return
 
 def get_apod_image_url(apod_info_dict):
