@@ -1,6 +1,6 @@
 """ 
 COMP 593 - Final Project
-
+Author=Mhenur Master, Nisharg Patel, Sneha Malhotra, Siddharth Patel
 
 Description: 
   Downloads NASA's Astronomy Picture of the Day (APOD) from a specified date
