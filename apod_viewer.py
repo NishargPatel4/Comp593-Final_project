@@ -1,10 +1,11 @@
 import tkinter as tk
 from tkinter import ttk
-import apod_desktop
-from tkcalendar import DateEntry
 from PIL import ImageTk, Image
 import os
 import image_lib
+import apod_desktop
+from tkcalendar import DateEntry
+from datetime import date
 
 # TODO: Create the GUI
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -32,6 +33,11 @@ root.title("Astronomy Picture of the Day Viewer")
 root.geometry("800x600")
 root.iconbitmap(os.path.join(script_dir,'icon.ico'))
 
+def download_apod():
+    selected_date = date_entry.get_date()
+    apod_desktop.download_apod(selected_date)
+    image_selection['values'] = apod_desktop.get_all_apod_titles()
+
 image_path = os.path.join(script_dir, 'nasa.png')
 image_one = Image.open(image_path)
 image_one = image_one.resize((400, 300))
@@ -44,6 +50,16 @@ description_label.pack(pady=5)
 
 bottom_frame = tk.Frame(root)
 bottom_frame.pack(pady=10)
+
+date_frame = tk.LabelFrame(bottom_frame, text="Select Date")
+date_frame.grid(row=0, column=0, padx=5, pady=5)
+
+date_entry = DateEntry(date_frame, width=12, year=2024, month=8, day=13,
+                       mindate=date(1995, 6, 16), maxdate=date.today(), date_pattern='y-mm-dd')
+date_entry.grid(row=0, column=0, padx=5, pady=5)
+
+download_button = tk.Button(date_frame, text="Download APOD", command=download_apod)
+download_button.grid(row=0, column=1, padx=5, pady=5)
 
 view_cached_frame = tk.LabelFrame(bottom_frame, text="View Cached Image")
 view_cached_frame.grid(row=0, column=0, padx=5, pady=5)
